@@ -3,13 +3,14 @@ from django.contrib import messages
 from .models import *
 from userapp.models import *
 from facemorphattacks.FaceMatch import compare_images
+import os
 
 # Create your views here.
 def admin_login(request):
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
-        if username == 'admin' and password == 'admin':
+        if username == os.getenv('ADMIN_USERNAME') and password == os.getenv('ADMIN_PASSWORD'):
             messages.success(request, 'Login Successful')
             return redirect('admin_dashboard')
         else:
@@ -32,10 +33,6 @@ def admin_dashboard(request):
         'verified':verified,
         'invalid':invalid
     }
-    # context['users'] = users
-    # context['pending'] = pending
-    # context['verified'] = verified
-    # context['invalid'] = invalid
     return render(request, 'admin/admin-dashboard.html',context)
 
 def admin_view_users(request):
@@ -59,14 +56,12 @@ def admin_pending_applications(request):
 
 def admin_verified_applications(request):
     applications = ApplicationModel.objects.filter(status = 'Verified').order_by('-id')
-
-    return render(request, 'admin/admin-verified-applications.html',{
+    return render(request, 'admin/admin-verified-applications.list',{
         'applications':applications
     })
 
 def admin_invalid_applications(request):
     applications = ApplicationModel.objects.filter(status = 'Invalid').order_by('-id')
-
     return render(request, 'admin/admin-invalid-applications.html',{
         'applications':applications
     })
@@ -75,7 +70,6 @@ def admin_analysis(request):
     pending = ApplicationModel.objects.filter(status = 'Pending').count()
     verified = ApplicationModel.objects.filter(status = 'Verified').count()
     invalid = ApplicationModel.objects.filter(status = 'Invalid').count()
-
     return render(request, 'admin/admin-analysis.html',{
         'pending':pending,
         'verified':verified,
@@ -99,5 +93,4 @@ def admin_verify_application(request,id):
     app.status = 'Verified'
     app.save()
     messages.success(request, 'This Application Has a Clean Image')
-
     return redirect('admin_verified_applications')
