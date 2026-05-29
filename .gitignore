@@ -6,3 +6,30 @@ __pycache__/
 db.sqlite3
 staticfiles/
 media/
+
+# Dataset & Model Files
+dataset/
+*.h5
+*.pkl
+*.pt
+*.pth
+*.onnx
+
+# Vendor / Third-party static assets
+assets/static/admin/vendor/
+assets/static/main/plugins/
+
+# Python misc
+*.pyo
+*.pyd
+*.egg-info/
+dist/
+build/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
