@@ -56,7 +56,7 @@ def admin_pending_applications(request):
 
 def admin_verified_applications(request):
     applications = ApplicationModel.objects.filter(status = 'Verified').order_by('-id')
-    return render(request, 'admin/admin-verified-applications.list',{
+    return render(request, 'admin/admin-verified-applications.html',{  # Fixed: .list → .html
         'applications':applications
     })
 
