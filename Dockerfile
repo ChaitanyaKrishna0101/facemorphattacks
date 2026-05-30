@@ -23,6 +23,6 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
 
-RUN python manage.py collectstatic --no-input
+RUN python manage.py collectstatic --no-input --clear
 
 CMD gunicorn facemorphattacks.wsgi:application --bind 0.0.0.0:$PORT
