@@ -15,10 +15,6 @@ dataset/
 *.pth
 *.onnx
 
-# Vendor / Third-party static assets
-assets/static/admin/vendor/
-assets/static/main/plugins/
-
 # Python misc
 *.pyo
 *.pyd
