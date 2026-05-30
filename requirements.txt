@@ -24,3 +24,4 @@ six==1.16.0
 sqlparse==0.4.3
 tifffile==2022.10.10
 tzdata==2022.7
+whitenoise==6.11.0
