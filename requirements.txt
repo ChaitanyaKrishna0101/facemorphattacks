@@ -13,6 +13,7 @@ numpy==1.24.1
 opencv-python-headless==4.5.5.64
 packaging==23.0
 Pillow==9.4.0
+psycopg2-binary==2.9.12
 pyparsing==3.0.9
 python-dateutil==2.8.2
 python-dotenv==1.2.1
